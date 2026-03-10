@@ -5,8 +5,13 @@ sc = spellchecker.SpellChecker()
 while(True):
     sc.printMenu()
 
-    txtIn = input()
-    # Add input control here!
+    while True:
+        txtIn = input()
+        if txtIn.isdigit():
+            if 1<=int(txtIn)<=4:
+                break
+        print("Lingua non valida")
+
 
     if int(txtIn) == 1:
         print("Inserisci la tua frase in Italiano\n")

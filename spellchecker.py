@@ -1,5 +1,4 @@
 import time
-
 import multiDictionary as md
 
 class SpellChecker:
@@ -7,8 +6,40 @@ class SpellChecker:
     def __init__(self):
         pass
 
-    def handleSentence(self, txtIn, language):
-        pass
+    def handleSentence(self, text:str, language:str):
+        words=self.cleanSentence(text)
+        multidic= md.MultiDictionary()
+        (richlist,totaltime)=multidic.searchWordIn(words, language)
+        print("______________________________")
+        print("Using In")
+        for i in richlist:
+            if not i.corretta:
+                print(i)
+        print("Time Elapsed",totaltime)
+
+        (richlist, totaltime) = multidic.searchWordLinear(words, language)
+        print("______________________________")
+        print("Using Linear search")
+        for i in richlist:
+            if not i.corretta:
+                print(i)
+        print("Time Elapsed",totaltime)
+
+        (richlist, totaltime) = multidic.searchWordDichotomic(words, language)
+        print("______________________________\n")
+        print("Using Dichotomic search")
+        for i in richlist:
+            if not i.corretta:
+                print(i)
+        print("Time Elapsed", totaltime)
+        print("______________________________\n")
+
+    def cleanSentence(self, txtIn:str) ->list:
+        chars = "\\`*_{}[]()>#+-.!$?'%^;,=_~"
+        for c in chars:
+            txtIn = txtIn.replace(c, "")
+        words = txtIn.lower().split()
+        return words
 
     def printMenu(self):
         print("______________________________\n" +

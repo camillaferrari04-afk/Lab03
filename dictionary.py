@@ -1,13 +1,19 @@
 class Dictionary:
     def __init__(self):
-        pass
+        self._dict=[]
 
     def loadDictionary(self,path):
-        pass
+        try:
+            infile = open(path,"r")
+            for line in infile:
+                self._dict.append(line.strip())
+            infile.close()
+        except FileNotFoundError:
+            print("Documento non trovato")
+            pass
 
     def printAll(self):
-        pass
-
+        return self._dict
 
     @property
     def dict(self):
